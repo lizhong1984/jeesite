@@ -26,8 +26,8 @@
 </head>
 <body>
 	<div id="main">
-		<div id="header" class="navbar navbar-fixed-top">
-	      <div class="navbar-inner">
+		<div id="header" class="navbar navbar-fixed-top navbar-inner ">
+	      <div class="container">
 	      	 <div class="brand">${fns:getConfig('productName')}</div>
 	         <div class="nav-collapse">
 	           <ul id="menu" class="nav">
@@ -52,13 +52,6 @@
 	           </ul>
 	           <ul class="nav pull-right">
 				 <li><a href="${pageContext.request.contextPath}${fns:getFrontPath()}/index-${fnc:getCurrentSiteId()}.html" target="_blank" title="访问网站主页"><i class="icon-home"></i></a></li>
-			  	 <li id="themeSwitch" class="dropdown">
-			       	<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="主题切换"><i class="icon-th-large"></i></a>
-				    <ul class="dropdown-menu">
-				      <c:forEach items="${fns:getDictList('theme')}" var="dict"><li><a href="#" onclick="location='${pageContext.request.contextPath}/theme/${dict.value}?url='+location.href">${dict.label}</a></li></c:forEach>
-				    </ul>
-				    <!--[if lte IE 6]><script type="text/javascript">$('#themeSwitch').hide();</script><![endif]-->
-			     </li>
 			  	 <li class="dropdown">
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="个人信息">您好, <shiro:principal property="name"/></a>
 				    <ul class="dropdown-menu">
@@ -72,7 +65,7 @@
 	         </div><!--/.nav-collapse -->
 	      </div>
 	    </div>
-	    <div class="container-fluid">
+	    <div class="container">
 			<div id="content" class="row-fluid">
 				<div id="left">
 					<iframe id="menuFrame" name="menuFrame" src="${ctx}/sys/menu/tree?parentId=${firstMenuId}" style="overflow:visible;"
@@ -94,15 +87,16 @@
 		function wSize(){
 			var minHeight = 500, minWidth = 980;
 			var strs=getWindowSize().toString().split(",");
+			alert(strs[0]);
 			$("#menuFrame, #mainFrame, #openClose").height((strs[0]<minHeight?minHeight:strs[0])-$("#header").height()-$("#footer").height()-32);
 			$("#openClose").height($("#openClose").height()-5);
-			if(strs[1]<minWidth){
-				$("#main").css("width",minWidth-10);
-				$("html,body").css({"overflow":"auto","overflow-x":"auto","overflow-y":"auto"});
-			}else{
-				$("#main").css("width","auto");
-				$("html,body").css({"overflow":"hidden","overflow-x":"hidden","overflow-y":"hidden"});
-			}
+// 			if(strs[1]<minWidth){
+// 				$("#main").css("width",minWidth-10);
+// 				$("html,body").css({"overflow":"auto","overflow-x":"auto","overflow-y":"auto"});
+// 			}else{
+// 				$("#main").css("width","auto");
+// 				$("html,body").css({"overflow":"hidden","overflow-x":"hidden","overflow-y":"hidden"});
+// 			}
 			$("#right").width($("#content").width()-$("#left").width()-$("#openClose").width()-5);
 		}
 	</script>
